@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 
+
 const addCourse = async (req, res) => {
     const { coursename, courseprice, courseduration, coursedecription, coursestatus } = req.body;
     const courseimage = req.file.filename;
@@ -33,7 +34,7 @@ const addCourse = async (req, res) => {
 const viewCourses = async (req, res) => {
     try {
         const courses = await Course.find();
-        const finalCourses = courses.map(course => ({
+        const finalCourses = courses.map((course) => ({
             ...course._doc, courseimage:` ${req.protocol}://${req.get('host')}/uploads/${course.courseimage}`
         }));
         res.status(200).json({ message: 'Courses Found Successfully', data: finalCourses });

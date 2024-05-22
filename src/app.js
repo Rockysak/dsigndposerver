@@ -1,7 +1,9 @@
 require('../db/config');
 
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
+
+const allRoutes = express.Router();
 
 const courserouter = require('../src/routers/courserouter');
 
@@ -13,20 +15,14 @@ const teamrouter = require('../src/routers/Teamrouter');
 
 const videorouter = require('../src/routers/Videorouter');
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+// const app = express();
+// app.use(express.json());
+// app.use(cors());
 
-app.use('/Courseapi',courserouter);
-app.use('/',loginrouter);
-app.use('/Sliderapi',sliderrouter);
-app.use('/Teamapi',teamrouter)
-app.use('/Videosapi', videorouter);
+allRoutes.use('/Courseapi',courserouter);
+allRoutes.use('/',loginrouter);
+allRoutes.use('/Sliderapi',sliderrouter);
+allRoutes.use('/Teamapi',teamrouter)
+allRoutes.use('/Videosapi', videorouter);
 
-const port = 7000 ;
-
-app.listen(port,()=>{
-
-    console.log(`server is running on port ${port}`);
-
-})
+module.exports = allRoutes;
